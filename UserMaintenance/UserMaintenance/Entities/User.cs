@@ -10,7 +10,9 @@ namespace UserMaintenance.Entities
     {
       
         public string FullName { get; set; }
-      
+        public Guid ID { get; set; } = Guid.NewGuid();
+
+
 
     }
 }
