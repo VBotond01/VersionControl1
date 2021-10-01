@@ -14,20 +14,21 @@ namespace UserMaintenance
 {
     public partial class Form1 : Form
     {
-        BindingList<User> users = new BindingList<User> { };
+        BindingList<User> users = new BindingList<User> ();
 
         public Form1()
         {
             InitializeComponent();
             label1.Text = Resource1.FullName;
-           
+            button2.Text = Resource1.Write;
+            button3.Text = Resource1.Delete;
             button1.Text = Resource1.Add;
 
             listBox1.DataSource = users;
             listBox1.ValueMember = "ID";
             listBox1.DisplayMember = "FullName";
 
-
+            
 
         }
 
@@ -56,6 +57,15 @@ namespace UserMaintenance
 
                 }
             }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            var törlés = listBox1.SelectedItem;
+
+            if (törlés != null)
+                users.Remove((User)törlés);
+
         }
     }
 }

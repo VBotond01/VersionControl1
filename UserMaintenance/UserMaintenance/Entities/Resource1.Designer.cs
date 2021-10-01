@@ -70,7 +70,16 @@ namespace UserMaintenance.Entities {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Teljes Név.
+        ///   Looks up a localized string similar to Törlés.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Teljes Név:.
         /// </summary>
         public static string FullName {
             get {
@@ -81,9 +90,9 @@ namespace UserMaintenance.Entities {
         /// <summary>
         ///   Looks up a localized string similar to Fájlba Írás.
         /// </summary>
-        public static string String1 {
+        public static string Write {
             get {
-                return ResourceManager.GetString("String1", resourceCulture);
+                return ResourceManager.GetString("Write", resourceCulture);
             }
         }
     }
