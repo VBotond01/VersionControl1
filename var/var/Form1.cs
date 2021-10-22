@@ -12,9 +12,14 @@ namespace var
 {
     public partial class Form1 : Form
     {
+        PortfolioEntities context = new PortfolioEntities();
+        List<Tick> Ticks;
         public Form1()
         {
             InitializeComponent();
+            Ticks = context.Ticks.ToList(); //A ToList fontos
+            dataGridView1.DataSource = Ticks;
+
         }
     }
 }
