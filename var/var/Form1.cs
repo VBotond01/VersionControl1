@@ -23,47 +23,77 @@ namespace var
             dataGridView1.DataSource = Ticks;
             CreatePortfolio();
 
-        /*    int elemszam = Portfolio.Count();
-            decimal részvényekszáma = (from x in Portfolio 
-                                       select x.Volume).Sum();
 
-            var otp = from x in Ticks
-                      where x.Index.Trim().Equals("OTP")
-                      select new
-                      {
-                          x.Index,
-                          x.Price
-                      };
-            Console.WriteLine("OTP darabszám: " + otp.Count().ToString());
-            var top = from o in otp
-                      where o.Price > 7000
-                      select o;
-            Console.WriteLine("OTP darabszám több mint 7000: " + top.Count().ToString());
+            List<decimal> Nyereségek = new List<decimal>(); // csak decimális értékek vannak benne
 
-            var topsum = (from t in top
-                          select t.Price).Sum();
+            // felhasználótól szokás bekérni
+            int intervalum = 30;
+            DateTime kezdőDátum = (from x in Ticks select x.TradingDay).Min();
+            DateTime záróDátum = new DateTime(2016, 12, 30); //DateTimePicker.Value és beállítani az alap értékét
+            
 
-            DateTime minDátum = (from x in Ticks
-                                 select x.TradingDay).Min();
-            DateTime maxdátum = (from x in Ticks
-                                 select x.TradingDay).Max();
-            int elteltNapokSzáma = (maxdátum - minDátum).Days;
-            Console.WriteLine((elteltNapokSzáma).ToString());
+            TimeSpan z = záróDátum - kezdőDátum;
 
-            var kapcsolt = from x in Ticks
-                           join
-                                y in Portfolio
-                            on x.Index equals y.Index
-                           select new
-                           {
-                               Index = x.Index,
-                               Date = x.TradingDay,
-                               Value = x.Price,
-                               Volume = y.Volume
+            for (int i = 0; i < z.Days - intervalum; i++) //garantálva van hogy nem fogunk kicsúzni a záródátumunkból
+            {
+             /*   DateTime ablakZáró = kezdőDátum.AddDays(i + intervalum);
+                DateTime ablakNyitó = kezdőDátum.AddDays(i);
+                decimal ny = GetPortfolioValue(ablakZáró) -
+                            GetPortfolioValue(ablakNyitó); */
 
-                           };
+                decimal ny = GetPortfolioValue(kezdőDátum.AddDays(i + intervalum))
+                           - GetPortfolioValue(kezdőDátum.AddDays(i));
+                Nyereségek.Add(ny);
+                Console.WriteLine(i + " " + ny);
+            }
 
-            dataGridView1.DataSource = kapcsolt.ToList();  */
+            var nyereségekRendezve = (from x in Nyereségek
+                                      orderby x
+                                      select x)
+                                        .ToList();
+            MessageBox.Show(nyereségekRendezve[nyereségekRendezve.Count() / 5].ToString()); //20%-os konfidencia szint mellett max ennyi veszteségünk lehet
+
+            /*    int elemszam = Portfolio.Count();
+                decimal részvényekszáma = (from x in Portfolio 
+                                           select x.Volume).Sum();
+
+                var otp = from x in Ticks
+                          where x.Index.Trim().Equals("OTP")
+                          select new
+                          {
+                              x.Index,
+                              x.Price
+                          };
+                Console.WriteLine("OTP darabszám: " + otp.Count().ToString());
+                var top = from o in otp
+                          where o.Price > 7000
+                          select o;
+                Console.WriteLine("OTP darabszám több mint 7000: " + top.Count().ToString());
+
+                var topsum = (from t in top
+                              select t.Price).Sum();
+
+                DateTime minDátum = (from x in Ticks
+                                     select x.TradingDay).Min();
+                DateTime maxdátum = (from x in Ticks
+                                     select x.TradingDay).Max();
+                int elteltNapokSzáma = (maxdátum - minDátum).Days;
+                Console.WriteLine((elteltNapokSzáma).ToString());
+
+                var kapcsolt = from x in Ticks
+                               join
+                                    y in Portfolio
+                                on x.Index equals y.Index
+                               select new
+                               {
+                                   Index = x.Index,
+                                   Date = x.TradingDay,
+                                   Value = x.Price,
+                                   Volume = y.Volume
+
+                               };
+
+                dataGridView1.DataSource = kapcsolt.ToList();  */
 
         }
 
@@ -92,8 +122,8 @@ namespace var
                 var last = (from x in Ticks
                             where item.Index == x.Index.Trim()
                                && date <= x.TradingDay
-                              /// orderby x.TradingDay ez most nem kell,
-                              /// de ezzel garantálni tudjuk hogy az általunk megadott dátumhoz 
+                              orderby x.TradingDay
+                              /// ezzel garantálni tudjuk hogy az általunk megadott dátumhoz 
                               /// legközelebbi értékkel fogunk számolni
                             select x)
                             .First();
@@ -101,6 +131,8 @@ namespace var
             }
             return value;
         }
+
+
     }
 
 
