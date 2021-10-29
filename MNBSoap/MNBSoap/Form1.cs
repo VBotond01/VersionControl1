@@ -32,7 +32,7 @@ namespace MNBSoap
             string result = response.GetCurrenciesResult;
             XmlDocument vxml = new XmlDocument();
             vxml.LoadXml(result);
-            foreach (XmlElement item in vxml.FirstChild.ChildNodes)
+            foreach (XmlElement item in vxml.DocumentElement.FirstChild.ChildNodes)
             {
                 currencies.Add(item.InnerText);
             }
@@ -98,6 +98,7 @@ namespace MNBSoap
             request.endDate = dateTimePicker2.Value.ToString("yyyy-MM-dd"); //"2020-06-30";
             var response = mnbService.GetExchangeRates(request);
             string result = response.GetExchangeRatesResult;
+           // File.WriteAllText("ghp", result);
             return result;
 
 

@@ -29,9 +29,9 @@ namespace MNBSoap
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.chartRateData = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -51,7 +51,7 @@ namespace MNBSoap
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(13, 66);
             this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(306, 298);
+            this.dataGridView1.Size = new System.Drawing.Size(306, 557);
             this.dataGridView1.TabIndex = 0;
             // 
             // chartRateData
@@ -59,17 +59,17 @@ namespace MNBSoap
             this.chartRateData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            chartArea4.Name = "ChartArea1";
-            this.chartRateData.ChartAreas.Add(chartArea4);
-            legend4.Name = "Legend1";
-            this.chartRateData.Legends.Add(legend4);
+            chartArea2.Name = "ChartArea1";
+            this.chartRateData.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartRateData.Legends.Add(legend2);
             this.chartRateData.Location = new System.Drawing.Point(325, 66);
             this.chartRateData.Name = "chartRateData";
-            series4.ChartArea = "ChartArea1";
-            series4.Legend = "Legend1";
-            series4.Name = "Series1";
-            this.chartRateData.Series.Add(series4);
-            this.chartRateData.Size = new System.Drawing.Size(463, 298);
+            series2.ChartArea = "ChartArea1";
+            series2.Legend = "Legend1";
+            series2.Name = "Series1";
+            this.chartRateData.Series.Add(series2);
+            this.chartRateData.Size = new System.Drawing.Size(791, 557);
             this.chartRateData.TabIndex = 1;
             this.chartRateData.Text = "chart1";
             // 
@@ -80,7 +80,6 @@ namespace MNBSoap
             this.dateTimePicker1.Size = new System.Drawing.Size(200, 20);
             this.dateTimePicker1.TabIndex = 2;
             this.dateTimePicker1.Value = new System.DateTime(2020, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.Visible = false;
             this.dateTimePicker1.ValueChanged += new System.EventHandler(this.filterChanged);
             // 
             // dateTimePicker2
@@ -136,7 +135,7 @@ namespace MNBSoap
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1128, 709);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
