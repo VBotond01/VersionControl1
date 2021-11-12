@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,15 +8,17 @@ using week08.Abstractions;
 
 namespace week08.Entities
 {
-    public class BallFactory : IToyFactory
+    public class CarFactory : IToyFactory
     {
-        public Color BallColor { get; set; }
-        public Toy CreateNew()
+        public Car CreateNew()
         {
-            return new Ball(BallColor);
+            return new Car();
 
         }
 
-     
+        Toy IToyFactory.CreateNew()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -9,15 +9,14 @@ using week08.Abstractions;
 
 namespace week08.Entities
 {
-    public class BallFactory : IToyFactory
+    public class PresentFactory : IToyFactory
     {
-        public Color BallColor { get; set; }
+        public Color BoxColor { get; set; }
+        public Color RibbonColor { get; set; }
         public Toy CreateNew()
         {
-            return new Ball(BallColor);
+            return new Present(BoxColor, RibbonColor);
 
         }
-
-     
     }
 }
