@@ -16,9 +16,10 @@ namespace UnitTestExample.Test
             TestCase("sdfds.hu",false),
             TestCase("sdfsd@sdfsdf.hu",true)
             
-            
-            
+
+
             ]
+        
         public void TestValidateEmail(string email, bool expectedResult)
         {
             //Arrange
@@ -37,7 +38,29 @@ namespace UnitTestExample.Test
 
 
         }
+        [Test,
+            TestCase("sfasdf", false),
+            TestCase("ASD",false),
+            TestCase("AasdAdsa",false),
+            TestCase("asdsA2",true)
 
+
+            ]
+        public void TestValidatePassword(string password, bool expectedResult)
+        {
+            //Arrange
+            var accountController = new AccountController();
+
+
+
+            //Act
+
+            var valtozo = accountController.ValidateEmail(password);
+
+            //Assert
+            Assert.AreEqual(expectedResult, valtozo);
+
+        }
 
 
 

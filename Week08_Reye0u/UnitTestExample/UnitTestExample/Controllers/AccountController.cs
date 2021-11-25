@@ -50,7 +50,10 @@ namespace UnitTestExample.Controllers
 
         public bool ValidatePassword(string password)
         {
-            return true;
+            return Regex.IsMatch(
+                password,
+                @"[a-zA-Z0-9]"
+                );
         }
     }
 }
