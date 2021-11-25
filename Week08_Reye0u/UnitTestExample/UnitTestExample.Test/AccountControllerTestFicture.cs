@@ -61,7 +61,26 @@ namespace UnitTestExample.Test
             Assert.AreEqual(expectedResult, valtozo);
 
         }
+        [Test,
+            TestCase("sfdsf@sdfsd.hu", "Abcsdf324"),
+            TestCase("adasd@sdfsd.hu","AsdsAi3423")
+            ]
+        public void TestRegisterHappyPath(string email, string password)
+        {
+            //Arrange
+            var accountController = new AccountController();
 
+
+
+            //Act
+
+            var valtozo = accountController.Register(email, password);
+
+            //Assert
+            Assert.AreEqual(email, valtozo.Email);
+            Assert.AreEqual(password, valtozo.Password);
+            Assert.AreNotEqual(Guid.Empty, valtozo.ID);
+        }
 
 
 
