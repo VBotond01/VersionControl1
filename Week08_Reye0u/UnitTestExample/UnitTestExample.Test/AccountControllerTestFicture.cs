@@ -10,8 +10,16 @@ namespace UnitTestExample.Test
 {
     class AccountControllerTestFicture
     {
-        [Test]
-        private void TestValidateEmail(string email, bool expectedResult)
+        [Test,
+            TestCase("sdfsd123",false),
+            TestCase("fsf@asdfs",false),
+            TestCase("sdfds.hu",false),
+            TestCase("sdfsd@sdfsdf.hu",true)
+            
+            
+            
+            ]
+        public void TestValidateEmail(string email, bool expectedResult)
         {
             //Arrange
             var accountController = new AccountController();
