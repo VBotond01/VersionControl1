@@ -1,10 +1,13 @@
 ﻿using NUnit.Framework;
 using System;
+using System.Activities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using UnitTestExample.Controllers;
+using System.Activities;
+
 
 namespace UnitTestExample.Test
 {
@@ -81,8 +84,41 @@ namespace UnitTestExample.Test
             Assert.AreEqual(password, valtozo.Password);
             Assert.AreNotEqual(Guid.Empty, valtozo.ID);
         }
+        [ Test,
+             TestCase("isds@sdsds.hu", "Asdfd1234234"),
+    TestCase("isfds.u123inus.hu", "Abcd12311234"),
+    TestCase("irf@uni-corvinus.hu", "abcd1234"),
+    TestCase("irf@uni-corvinus.hu", "ABCD1234"),
+    TestCase("irf@uni-corvinus.hu", "abcdABCD"),
+    TestCase("irf@uni-corvinus.hu", "Ab1234"),
+            ]
+        public void TestRegisterValidateException(string email, string password)
+        { 
+            //Arrange
+            var accountController = new AccountController();
 
 
+
+            //Act
+            try
+            {
+                var valtozo = accountController.Register(email, password);
+                Assert.Fail();
+
+            }
+            catch (Exception ex)
+            {
+                Assert.IsInstanceOf<ValidationException>(ex);
+
+            }
+           
+
+            //Assert
+            Assert.AreEqual(email, valtozo.Email);
+            Assert.AreEqual(password, valtozo.Password);
+            Assert.AreNotEqual(Guid.Empty, valtozo.ID);
+
+        }
 
     }
 }
