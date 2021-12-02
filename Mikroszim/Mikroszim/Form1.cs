@@ -18,6 +18,7 @@ namespace Mikroszim
         List<BirthProbability> BirthProbabilities = new List<BirthProbability>();
         List<DeathProbability> DeathProbabilities = new List<DeathProbability>();
         Random rand = new Random(1234);
+        public string fájlnév { get; set; }
 
 
         public Form1()
@@ -33,7 +34,7 @@ namespace Mikroszim
             {
                 for (int i = 0; i < Population.Count; i++)
                 {
-
+                    SimStep(year,Population[i]);
                 }
 
                 int nbrOfMales = (from x in Population
@@ -121,5 +122,60 @@ namespace Mikroszim
 
         }
 
+        private void SimStep(int year, Person person)
+        {
+            if (!person.IsAlive) return;
+            var age = year - person.BirthYear;
+
+            var halál = ( from x in DeathProbabilities
+                          where x.Gender == person.Gender && x.Age == age
+                          select x.DeathRates).FirstOrDefault();
+
+            if(rand.NextDouble() <= halál)
+            person.IsAlive = false;
+            if (person.IsAlive && person.Gender == Gender.Woman)
+            {
+
+                var birthrates = (from x in BirthProbabilities
+                                  where x.Age == age
+                                  select x.BornRates).FirstOrDefault();
+                if(rand.NextDouble() <= birthrates)
+                {
+                    Person újszülött = new Person();
+                    újszülött.BirthYear = year;
+                    újszülött.NumberOfChildren = 0;
+                    újszülött.Gender = (Gender)(rand.Next(1, 3));
+                    Population.Add(újszülött);
+                }
+            }
+
+
+            
+        }
+        private void Simulation()
+        {
+         
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Simulation();
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog asd = new OpenFileDialog())
+            {
+                asd.InitialDirectory = "C:\\";
+                asd.FilterIndex = 2;
+
+                if (asd.ShowDialog() == DialogResult.OK)
+                {
+                    fájlnév = asd.FileName;
+                }
+                
+            }
+        }
     }
 }
